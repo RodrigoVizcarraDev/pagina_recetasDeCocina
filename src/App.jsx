@@ -19,6 +19,7 @@ function App() {
   return (
     <>
     <BrowserRouter>
+      <Nav></Nav>
       <Routes>
         <Route path="/" element={<Inicio></Inicio>}></Route>
         <Route path="/administrador" element={<Administrador></Administrador>}></Route>
@@ -28,6 +29,7 @@ function App() {
         <Route path="/crear-receta" element={<CrearReceta></CrearReceta>}></Route>
         <Route path="/registro" element={<Registro></Registro>}></Route>
       </Routes>
+      <Footer></Footer>
     </BrowserRouter>
     </>
   )
