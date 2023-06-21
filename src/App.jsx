@@ -21,13 +21,14 @@ function App() {
     <BrowserRouter>
       <Nav></Nav>
       <Routes>
-        <Route path="/" element={<Inicio></Inicio>}></Route>
-        <Route path="/administrador" element={<Administrador></Administrador>}></Route>
-        <Route path="/login" element={<Login></Login>}></Route>
-        <Route path="/detalle-receta" element={<PaginaReceta></PaginaReceta>}></Route>
-        <Route path="/editar-receta" element={<EditarReceta></EditarReceta>}></Route>
-        <Route path="/crear-receta" element={<CrearReceta></CrearReceta>}></Route>
-        <Route path="/registro" element={<Registro></Registro>}></Route>
+        <Route exact path="/" element={<Inicio></Inicio>}></Route>
+        <Route exact path="/administrador" element={<Administrador></Administrador>}></Route>
+        <Route exact path="/login" element={<Login></Login>}></Route>
+        <Route exact path="/detalle-receta" element={<PaginaReceta></PaginaReceta>}></Route>
+        <Route exact path="/editar-receta" element={<EditarReceta></EditarReceta>}></Route>
+        <Route exact path="/crear-receta" element={<CrearReceta></CrearReceta>}></Route>
+        <Route exact path="/registro" element={<Registro></Registro>}></Route>
+        <Route path="/*" element={<Error404></Error404>}></Route>
       </Routes>
       <Footer></Footer>
     </BrowserRouter>
