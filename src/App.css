@@ -1,0 +1,24 @@
+/* estilos de pagina login */
+.contenedorCentrado{
+  border: 1px solid black;
+}
+/* Estilos para acomodar navbar arriba y footer abajo*/
+#root{
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+.mainSection{
+  flex-grow: 1;
+}
+/* Estilos pagina inicio */
+.img_pagina_inicio {
+  width: 100%;
+  height: 400px;
+  object-fit: cover;
+}
+/* Estilos paginaReceta */
+.imgReceta {
+  width: 90%;
+  max-width: 600px;
+}
