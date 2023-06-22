@@ -11,19 +11,19 @@ import CrearReceta from "./views/Receta/CrearReceta";
 import EditarReceta from "./views/Receta/EditarReceta";
 import PaginaReceta from "./views/Receta/PaginaReceta";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-
+import { useState } from "react";
 
 function App() {
- 
+  const [usuarioLogueado, setUsuarioLogueado] = useState({});
 
   return (
     <>
     <BrowserRouter>
-      <Nav></Nav>
+      <Nav usuarioLogueado={usuarioLogueado} setUsuarioLogueado={setUsuarioLogueado}></Nav>
       <Routes>
         <Route exact path="/" element={<Inicio></Inicio>}></Route>
         <Route exact path="/administrador" element={<Administrador></Administrador>}></Route>
-        <Route exact path="/login" element={<Login></Login>}></Route>
+        <Route exact path="/login" element={<Login setUsuarioLogueado={setUsuarioLogueado}></Login>}></Route>
         <Route exact path="/detalle-receta" element={<PaginaReceta></PaginaReceta>}></Route>
         <Route exact path="/editar-receta" element={<EditarReceta></EditarReceta>}></Route>
         <Route exact path="/crear-receta" element={<CrearReceta></CrearReceta>}></Route>
