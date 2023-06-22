@@ -36,13 +36,52 @@ export const iniciarSesion = async (usuario) => {
     }
 }
 
-export const consultarListaProducto = async () => {
+export const consultarListaRecetas = async () => {
     try{
         const respuesta = await fetch(URL_receta);
 
         const listaRecetas = await respuesta.json();
 
         return listaRecetas;
+    }catch(error){
+        console.log(error);
+    }
+}
+
+export const editarReceta = async (receta, id) => {
+    try{
+        const respuesta = await fetch(URL_receta+"/"+id, {
+            method: "PUT",
+            headers:{
+                "Content-Type": "aplication/json"
+            },
+            body: JSON.stringify(receta)
+        });
+        return respuesta; // status 201 se pudo  crear
+    }catch(error){
+        console.log(error);
+    }
+}
+
+
+export const borrarReceta = async (id) => {
+    try{
+        const respuesta = await fetch(URL_receta+"/"+id, {
+            method: "DELETE",
+        });
+        return respuesta; // status 201 se pudo  crear
+    }catch(error){
+        console.log(error);
+    }
+}
+
+export const obtenerReceta = async (id) => {
+    try{
+        const respuesta = await fetch(URL_receta+"/"+id);
+
+        const receta = await respuesta.json();
+
+        return receta;// retorna una receta
     }catch(error){
         console.log(error);
     }

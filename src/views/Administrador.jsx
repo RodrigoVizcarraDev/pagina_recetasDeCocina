@@ -2,7 +2,7 @@ import Table from "react-bootstrap/Table";
 import ItemTablaReceta from "./Receta/ItemTablaReceta";
 import { Button } from "react-bootstrap";
 import { useEffect, useState } from "react";
-import { consultarListaProducto } from "../helpers/queries";
+import { consultarListaRecetas } from "../helpers/queries";
 import Swal from "sweetalert2";
 
 const Administrador = () => {
@@ -10,7 +10,7 @@ const Administrador = () => {
 
     useEffect(() => {
         // consultar a la api y guardar receta en el state
-        consultarListaProducto().then((consultaListaReceta) => {
+        consultarListaRecetas().then((consultaListaReceta) => {
             if (consultaListaReceta) {
                 setListaRecetas(consultaListaReceta);
             } else {
