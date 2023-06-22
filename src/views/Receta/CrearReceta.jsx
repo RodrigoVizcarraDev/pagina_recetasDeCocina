@@ -12,8 +12,6 @@ const CrearReceta = () => {
     } = useForm();
 
     const onSubmit = (recetaNueva) => {
-        console.log(recetaNueva);
-        console.log("TEXTO ABAJO DE RECETA");
         crearReceta(recetaNueva).then((respuesta) => {
             console.log(respuesta);
             if (respuesta.status === 201) {

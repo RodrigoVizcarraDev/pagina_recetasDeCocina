@@ -88,8 +88,6 @@ export const obtenerReceta = async (id) => {
 };
 
 export const crearReceta = async(receta) => {
-    console.log("recetita:");
-    console.log(JSON.stringify(receta));
     try {
         const respuesta = await fetch(URL_receta, {
             method: "POST",
