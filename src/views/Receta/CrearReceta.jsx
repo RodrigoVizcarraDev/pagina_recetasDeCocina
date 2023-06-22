@@ -1,5 +1,7 @@
 import { Form, Button, FloatingLabel } from "react-bootstrap";
 import { useForm } from "react-hook-form";
+import Swal from "sweetalert2";
+import { crearReceta } from "../../helpers/queries";
 
 const CrearReceta = () => {
     const {
@@ -9,8 +11,26 @@ const CrearReceta = () => {
         reset,
     } = useForm();
 
-    const onSubmit = (usuario) => {
-        console.log(usuario);
+    const onSubmit = (recetaNueva) => {
+        console.log(recetaNueva);
+        console.log("TEXTO ABAJO DE RECETA");
+        crearReceta(recetaNueva).then((respuesta) => {
+            console.log(respuesta);
+            if (respuesta.status === 201) {
+                Swal.fire(
+                    "Receta creada",
+                    `La receta ${recetaNueva.nombreReceta}fue creado con exito`,
+                    "success"
+                );
+                reset();
+            } else {
+                Swal.fire(
+                    "Error al crear",
+                    `El receta ${recetaNueva.nombreReceta} no pudo ser creado`,
+                    "error"
+                );
+            }
+        });
     };
 
     return (
@@ -46,16 +66,16 @@ const CrearReceta = () => {
                         <Form.Control
                             type="text"
                             placeholder="imagen de la receta"
-                            {...register("urlProducto", {
-                                required: "La URL del producto es obligatoria",
+                            {...register("imagen", {
+                                required: "La URL del receta es obligatoria",
                                 pattern: {
                                     value: /^https:\/\/[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)*\.[a-zA-Z]{2,6}(\/[^\s]*)?$/,
                                     message: "URL invalia",
-                                }
+                                },
                             })}
                         />
                         <Form.Text className="text-danger">
-                            {errors.urlProducto?.message}
+                            {errors.imagen?.message}
                         </Form.Text>
                     </Form.Group>
                     <FloatingLabel
@@ -65,16 +85,17 @@ const CrearReceta = () => {
                         <Form.Control
                             as="textarea"
                             style={{ height: "150px" }}
-                            {...register("descripcionReceta",{
+                            {...register("descripcion", {
                                 required: "La descripcion es obligatoria",
-                                minLength:{
+                                minLength: {
                                     value: 150,
-                                    message: "Como minimo una receta debe tener 150 caracteres"
+                                    message:
+                                        "Como minimo una receta debe tener 150 caracteres",
                                 },
                             })}
                         />
                         <Form.Text className="text-danger">
-                            {errors.descripcionReceta?.message}
+                            {errors.descripcion?.message}
                         </Form.Text>
                     </FloatingLabel>
                     <Button variant="primary" type="submit" className="mt-3">

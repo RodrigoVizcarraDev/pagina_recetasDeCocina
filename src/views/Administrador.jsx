@@ -1,17 +1,32 @@
 import Table from "react-bootstrap/Table";
 import ItemTablaReceta from "./Receta/ItemTablaReceta";
-import { Button } from "react-bootstrap";
+import { useEffect, useState } from "react";
+import { consultarListaRecetas } from "../helpers/queries";
+import Swal from "sweetalert2";
+import { Link } from "react-router-dom";
 
 const Administrador = () => {
+    const [recetas, setListaRecetas] = useState([]);
+
+    useEffect(() => {
+        // consultar a la api y guardar receta en el state
+        consultarListaRecetas().then((consultaListaReceta) => {
+            if (consultaListaReceta) {
+                setListaRecetas(consultaListaReceta);
+            } else {
+                Swal.fire(
+                    "Error",
+                    "Intente realizar la operacion en unos minutos",
+                    "error"
+                );
+            }
+        });
+    }, []);
     return (
         <div className="container mainSection">
             <section className="d-flex justify-content-between align-items-center mt-5">
                 <h1 className=" text-center">Administrar recetas</h1>
-                <Button
-                    className="btn btn-primary"
-                >
-                    Agregar
-                </Button>
+                <Link className="btn btn-primary" to={"/administrador/crear-receta"}>Agregar</Link>
             </section>
             <div className="my-3">
                 <Table responsive striped bordered hover>
@@ -25,8 +40,18 @@ const Administrador = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        <ItemTablaReceta></ItemTablaReceta>
-                        <ItemTablaReceta></ItemTablaReceta>
+                        {recetas.map((receta) => {
+                            console.log("FUNCA EL MAPPPPPPPPP")
+                            console.log(receta)
+                            console.log("FUNCA EL MAPPPPPPPPP")
+
+                            return (
+                                <ItemTablaReceta
+                                    key={receta.id}
+                                    receta={receta}
+                                ></ItemTablaReceta>
+                            );
+                        })}
                     </tbody>
                 </Table>
             </div>
