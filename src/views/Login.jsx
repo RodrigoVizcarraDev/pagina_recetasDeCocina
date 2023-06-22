@@ -31,7 +31,7 @@ const login = () => {
                                     required: "El email es obligatorio",
                                     pattern:{
                                       value: /^(?!\.)(([^<>()\[\]\\.,;:\s@\"]+(\.[^<>()\[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
-                                      message: "El email es un dato obligatorio"
+                                      message: "El email debe tener el siguiente formato mail@dominio.como"
                                     }
                                 })}
                             />
