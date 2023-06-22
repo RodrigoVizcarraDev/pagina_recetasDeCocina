@@ -1,16 +1,19 @@
 import { Button } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
-const ItemTablaReceta = ({nombreReceta, imagen, descripcion, id}) => {
+//nombreReceta, imagen, descripcion, id
+const ItemTablaReceta = ({receta}) => {
+    
     return (
         <tr>
-            <td>{nombreReceta}</td>
-            <td>{imagen}</td>
-            <td>{descripcion}</td>
-            <td>{id}</td>
+            <td>{receta.nombreReceta}</td>
+            <td>{receta.imagen}</td>
+            <td>{receta.descripcion}</td>
+            <td>{receta.id}</td>
             <td>
-                <Button className="me-2" variant="warning">
+                <Link className="me-2 btn btn-warning" to={"/administrador/editar-receta/"+receta.id}>
                     Editar
-                </Button>
+                </Link>
                 <Button variant="danger">Borrar</Button>
             </td>
         </tr>

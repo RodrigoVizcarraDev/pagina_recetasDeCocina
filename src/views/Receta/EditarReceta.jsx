@@ -1,15 +1,37 @@
 import { Form, Button, FloatingLabel } from "react-bootstrap";
 import {useForm} from "react-hook-form";
+import { useEffect } from "react";
+import { useParams } from "react-router-dom";
+import { obtenerReceta } from "../../helpers/queries";
+
 const EditarReceta = () => {
     const {
         register,
         handleSubmit,
         formState: { errors },
         reset,
+        setValue
     } = useForm();
+
+    const {
+        id
+    } = useParams()
+
+    useEffect(()=>{
+        obtenerReceta(id).then((respuesta)=>{
+            // cargar en el formulario los datos del objeto
+
+            if(respuesta){
+                setValue("nombreReceta", respuesta.nombreReceta);
+                setValue("imagen", respuesta.imagen);
+                setValue("descripcion", respuesta.descripcion);
+            }
+        })
+    },[])  
 
     const onSubmit = (receta) => {
         console.log(receta);
+        // agregar la consulta de la api que pide editar es similar a crear producto
     };
     return (
         <section className="container mainSection my-4">
@@ -44,8 +66,8 @@ const EditarReceta = () => {
                         <Form.Control
                             type="text"
                             placeholder="imagen de la receta"
-                            {...register("urlProducto", {
-                                required: "La URL del producto es obligatoria",
+                            {...register("imagen", {
+                                required: "La URL de la imagen es obligatoria",
                                 pattern: {
                                     value: /^https:\/\/[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)*\.[a-zA-Z]{2,6}(\/[^\s]*)?$/,
                                     message: "URL invalia",
@@ -53,7 +75,7 @@ const EditarReceta = () => {
                             })}
                         />
                         <Form.Text className="text-danger">
-                            {errors.urlProducto?.message}
+                            {errors.imagen?.message}
                         </Form.Text>
                     </Form.Group>
                     <FloatingLabel
@@ -63,7 +85,7 @@ const EditarReceta = () => {
                         <Form.Control
                             as="textarea"
                             style={{ height: "150px" }}
-                            {...register("descripcionReceta", {
+                            {...register("descripcion", {
                                 required: "La descripcion es obligatoria",
                                 minLength: {
                                     value: 150,
@@ -73,7 +95,7 @@ const EditarReceta = () => {
                             })}
                         />
                         <Form.Text className="text-danger">
-                            {errors.descripcionReceta?.message}
+                            {errors.descripcion?.message}
                         </Form.Text>
                     </FloatingLabel>
                     <Button variant="primary" type="submit" className="mt-3">
