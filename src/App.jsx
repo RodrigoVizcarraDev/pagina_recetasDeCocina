@@ -14,7 +14,8 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { useState } from "react";
 
 function App() {
-  const [usuarioLogueado, setUsuarioLogueado] = useState({});
+  const usuariosDelLocalStorage = JSON.parse(localStorage.getItem("usuario")) || {};
+  const [usuarioLogueado, setUsuarioLogueado] = useState(usuariosDelLocalStorage);
 
   return (
     <>
