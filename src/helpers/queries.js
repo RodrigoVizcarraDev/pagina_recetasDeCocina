@@ -1,5 +1,6 @@
 // Llamar a una variable de entonrno con las reglas de vite
 const URL_usuario = import.meta.env.VITE_API_USUARIO;
+const URL_receta = import.meta.env.VITE_API_RECETAS;
 /*
 GET devuelven una lista de elementos o un elemento
 POST me permiten crear un elemento
@@ -30,6 +31,18 @@ export const iniciarSesion = async (usuario) => {
             return null;
         }
 
+    }catch(error){
+        console.log(error);
+    }
+}
+
+export const consultarListaProducto = async () => {
+    try{
+        const respuesta = await fetch(URL_receta);
+
+        const listaRecetas = await respuesta.json();
+
+        return listaRecetas;
     }catch(error){
         console.log(error);
     }
