@@ -1,7 +1,29 @@
 import { Row } from "react-bootstrap";
 import CardReceta from "./Receta/CardReceta";
+import { useEffect, useState } from "react";
+import { consultarListaRecetas } from "../helpers/queries";
+import Swal from "sweetalert2";
 
-const inicio = () => {
+const inicio = ({}) => {
+    
+    const [recetasInicio, setRecetasInicio] = useState([]);
+
+    useEffect(()=>{
+        //consultar a la api la lista de recetas en dbJson
+        consultarListaRecetas().then((respuesta)=>{
+            if(respuesta){
+                console.log(respuesta);
+                setRecetasInicio(respuesta);
+            }else{
+                Swal.fire(
+                    "Error",
+                    "No se pudieron cargar las recetas en el inicio",
+                    "error"
+                )
+            }
+        })
+    },[])
+
     return (
         <section className="mainSection">
             <div className="w-100">
@@ -16,10 +38,9 @@ const inicio = () => {
                     <hr />
                     <Row>
                         {/* Aqui van los componentes CardReceta */}
-                        <CardReceta></CardReceta>
-                        <CardReceta></CardReceta>
-                        <CardReceta></CardReceta>
-                        <CardReceta></CardReceta>
+                        {recetasInicio.map((receta)=>{
+                            return <CardReceta key={receta.id} nombreReceta={receta.nombreReceta} imagen={receta.imagen}></CardReceta>
+                        })}
                     </Row>
                 </article>
         </section>

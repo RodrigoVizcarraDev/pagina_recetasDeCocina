@@ -1,8 +1,9 @@
 import { Form, Button, FloatingLabel } from "react-bootstrap";
-import {useForm} from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { obtenerReceta } from "../../helpers/queries";
+import { editarReceta, obtenerReceta } from "../../helpers/queries";
+import Swal from "sweetalert2";
 
 const EditarReceta = () => {
     const {
@@ -10,28 +11,42 @@ const EditarReceta = () => {
         handleSubmit,
         formState: { errors },
         reset,
-        setValue
+        setValue,
     } = useForm();
 
-    const {
-        id
-    } = useParams()
+    const { id } = useParams();
 
-    useEffect(()=>{
-        obtenerReceta(id).then((respuesta)=>{
+    useEffect(() => {
+        obtenerReceta(id).then((respuesta) => {
             // cargar en el formulario los datos del objeto
 
-            if(respuesta){
+            if (respuesta) {
                 setValue("nombreReceta", respuesta.nombreReceta);
                 setValue("imagen", respuesta.imagen);
                 setValue("descripcion", respuesta.descripcion);
             }
-        })
-    },[])  
+        });
+    }, []);
 
     const onSubmit = (receta) => {
-        console.log(receta);
+        console.log(receta.id);
         // agregar la consulta de la api que pide editar es similar a crear producto
+        editarReceta(receta, id).then((respuesta)=>{
+            if(respuesta.status === 200){
+                Swal.fire(
+                    "Receta editada",
+                    `La receta ${receta.nombreReceta} fue editada con exito`,
+                    "success" 
+                );
+                reset();
+            }else{
+                Swal.fire(
+                    "Error al intentar editar",
+                    "Intentelo de nuevo",
+                    "error"
+                );
+            }
+        })
     };
     return (
         <section className="container mainSection my-4">
@@ -98,7 +113,12 @@ const EditarReceta = () => {
                             {errors.descripcion?.message}
                         </Form.Text>
                     </FloatingLabel>
-                    <Button variant="primary" type="submit" className="mt-3">
+                    <Button
+                        onSubmit={handleSubmit(onSubmit)}
+                        variant="primary"
+                        type="submit"
+                        className="mt-3"
+                    >
                         Enviar
                     </Button>
                 </Form>

@@ -3,14 +3,14 @@ import Administrador from "../views/Administrador";
 import EditarReceta from "../views/Receta/EditarReceta";
 import CrearReceta from "../views/Receta/CrearReceta";
 
-const RutasAdministrador = () => {
+const RutasAdministrador = ({setRecetasInicio}) => {
     return (
         <>
             <Routes>
                 <Route
                     exact
                     path="/"
-                    element={<Administrador></Administrador>}
+                    element={<Administrador setRecetasInicio={setRecetasInicio}></Administrador>}
                 ></Route>
                 <Route
                     exact

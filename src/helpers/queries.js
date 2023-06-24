@@ -69,7 +69,7 @@ export const borrarReceta = async (id) => {
         const respuesta = await fetch(URL_receta + "/" + id, {
             method: "DELETE",
         });
-        return respuesta; // status 201 se pudo  crear
+        return respuesta; // status 200 se pudo borrar
     } catch (error) {
         console.log(error);
     }
@@ -86,7 +86,6 @@ export const obtenerReceta = async (id) => {
         console.log(error);
     }
 };
-
 export const crearReceta = async(receta) => {
     try {
         const respuesta = await fetch(URL_receta, {

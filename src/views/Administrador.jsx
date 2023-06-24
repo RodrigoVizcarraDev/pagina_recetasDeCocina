@@ -5,9 +5,9 @@ import { consultarListaRecetas } from "../helpers/queries";
 import Swal from "sweetalert2";
 import { Link } from "react-router-dom";
 
-const Administrador = () => {
+const Administrador = ({}) => {
     const [recetas, setListaRecetas] = useState([]);
-
+    
     useEffect(() => {
         // consultar a la api y guardar receta en el state
         consultarListaRecetas().then((consultaListaReceta) => {
@@ -22,6 +22,8 @@ const Administrador = () => {
             }
         });
     }, []);
+
+    
     return (
         <div className="container mainSection">
             <section className="d-flex justify-content-between align-items-center mt-5">
@@ -41,14 +43,12 @@ const Administrador = () => {
                     </thead>
                     <tbody>
                         {recetas.map((receta) => {
-                            console.log("FUNCA EL MAPPPPPPPPP")
-                            console.log(receta)
-                            console.log("FUNCA EL MAPPPPPPPPP")
-
                             return (
                                 <ItemTablaReceta
                                     key={receta.id}
                                     receta={receta}
+                                    recetas={recetas}
+                                    setListaRecetas={setListaRecetas}
                                 ></ItemTablaReceta>
                             );
                         })}

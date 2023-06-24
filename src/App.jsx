@@ -11,14 +11,29 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { useState } from "react";
 import RutasProtegidas from "./routes/RutasProtegidas";
 import RutasAdministrador from "./routes/RutasAdministrador";
-
+import { consultarListaRecetas } from "./helpers/queries";
 function App() {
+
     const usuariosDelLocalStorage =
         JSON.parse(localStorage.getItem("usuario")) || {};
+
     const [usuarioLogueado, setUsuarioLogueado] = useState(
         usuariosDelLocalStorage
     );
 
+    const listaRecetasDbJson = consultarListaRecetas().then((respuesta)=>{
+        try{
+            if(respuesta.status === 200){
+                return respuesta.json();  
+            }else{
+                return [];
+            }
+        }catch(error){
+            console.log(error);
+        }
+    })
+
+    // const [recetasInicio, setRecetasInicio] = useState(listaRecetasDbJson) || [];
     return (
         <>
             <BrowserRouter>
@@ -27,7 +42,7 @@ function App() {
                     setUsuarioLogueado={setUsuarioLogueado}
                 ></Nav>
                 <Routes>
-                    <Route exact path="/" element={<Inicio></Inicio>}></Route>
+                    <Route exact path="/" element={<Inicio ></Inicio>}></Route>
                     <Route
                         exact
                         path="/login"
@@ -46,11 +61,9 @@ function App() {
                         exact
                         path="/administrador/*"
                         element={
-                          <RutasProtegidas>
-                            <RutasAdministrador>
-
-                            </RutasAdministrador>
-                          </RutasProtegidas>
+                            <RutasProtegidas>
+                                <RutasAdministrador></RutasAdministrador>
+                            </RutasProtegidas>
                         }
                     ></Route>
                     <Route
