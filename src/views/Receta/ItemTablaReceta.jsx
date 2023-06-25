@@ -32,7 +32,7 @@ const ItemTablaReceta = ({receta, recetas, setListaRecetas}) => {
         <tr>
             <td>{receta.nombreReceta}</td>
             <td>{receta.imagen}</td>
-            <td>{receta.descripcion}</td>
+            <td className="text-truncate d-inline-block" style={{maxWidth:"250px"}}>{receta.descripcion}</td>
             <td>{receta.id}</td>
             <td>
                 <Link className="me-2 btn btn-warning" to={"/administrador/editar-receta/"+receta.id}>
