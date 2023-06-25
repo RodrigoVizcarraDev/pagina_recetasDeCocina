@@ -3,7 +3,8 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Container from "react-bootstrap/Container";
 import { useForm } from "react-hook-form";
-
+import { crearUsuario } from "../helpers/queries";
+import Swal from "sweetalert2";
 const Registro = () => {
     const {
         register,
@@ -13,7 +14,22 @@ const Registro = () => {
     } = useForm();
 
     const onSubmit = (usuario) => {
-        console.log(usuario);
+        crearUsuario(usuario).then((respuesta)=>{
+            if(respuesta.status === 201){
+                Swal.fire(
+                    `Usuario creado con exito`,
+                    "Exito",
+                    "success"
+                );
+                reset();
+            }else{
+                Swal.fire(
+                    "Usuario no pudo ser creado",
+                    "Error",
+                    "error"
+                );
+            }
+        });
     };
     return (
         <section className="my-5 mainSection">

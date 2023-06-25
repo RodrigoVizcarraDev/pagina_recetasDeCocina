@@ -86,12 +86,26 @@ export const obtenerReceta = async (id) => {
         console.log(error);
     }
 };
+
 export const crearReceta = async(receta) => {
     try {
         const respuesta = await fetch(URL_receta, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(receta)
+        });
+        return respuesta; // retorna una receta creada
+    } catch (error) {
+        console.log(error);
+    }
+};
+
+export const crearUsuario = async(usuario) => {
+    try {
+        const respuesta = await fetch(URL_usuario, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(usuario)
         });
         return respuesta; // retorna una receta creada
     } catch (error) {

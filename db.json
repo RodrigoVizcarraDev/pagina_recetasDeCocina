@@ -19,6 +19,12 @@
       "nombreUsuario": "admin",
       "email": "admin@rollingcode.com",
       "password": "123456aA"
+    },
+    {
+      "nombreUsuario": "rolo",
+      "email": "rodrigovizcarra1996@gmail.com",
+      "password": "123456aA",
+      "id": 2
     }
   ]
 }

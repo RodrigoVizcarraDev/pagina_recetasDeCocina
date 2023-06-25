@@ -5,24 +5,22 @@ import { consultarListaRecetas } from "../helpers/queries";
 import Swal from "sweetalert2";
 
 const inicio = ({}) => {
-    
     const [recetasInicio, setRecetasInicio] = useState([]);
 
-    useEffect(()=>{
+    useEffect(() => {
         //consultar a la api la lista de recetas en dbJson
-        consultarListaRecetas().then((respuesta)=>{
-            if(respuesta){
-                console.log(respuesta);
+        consultarListaRecetas().then((respuesta) => {
+            if (respuesta) {
                 setRecetasInicio(respuesta);
-            }else{
+            } else {
                 Swal.fire(
                     "Error",
                     "No se pudieron cargar las recetas en el inicio",
                     "error"
-                )
+                );
             }
-        })
-    },[])
+        });
+    }, []);
 
     return (
         <section className="mainSection">
@@ -33,16 +31,23 @@ const inicio = ({}) => {
                     className="img_pagina_inicio"
                 />
             </div>
-                <article className="container">
-                    <h1 className="text-center">Lista de recetas</h1>
-                    <hr />
-                    <Row>
-                        {/* Aqui van los componentes CardReceta */}
-                        {recetasInicio.map((receta)=>{
-                            return <CardReceta key={receta.id} nombreReceta={receta.nombreReceta} imagen={receta.imagen}></CardReceta>
-                        })}
-                    </Row>
-                </article>
+            <article className="container">
+                <h1 className="text-center">Lista de recetas</h1>
+                <hr />
+                <Row className="my-5">
+                    {/* Aqui van los componentes CardReceta */}
+                    {recetasInicio.map((receta) => {
+                        return (
+                            <CardReceta
+                                key={receta.id}
+                                nombreReceta={receta.nombreReceta}
+                                imagen={receta.imagen}
+                                recetaId={receta.id}
+                            ></CardReceta>
+                        );
+                    })}
+                </Row>
+            </article>
         </section>
     );
 };

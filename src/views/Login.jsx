@@ -16,7 +16,6 @@ const login = ({setUsuarioLogueado}) => {
     const navegacion = useNavigate();
 
     const onSubmit = (usuario) => {
-        console.log(usuario);
         iniciarSesion(usuario).then((respuesta) =>{
           if(respuesta){
             console.log("aqui esta todo bien");
