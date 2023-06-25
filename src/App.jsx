@@ -54,7 +54,7 @@ function App() {
                     ></Route>
                     <Route
                         exact
-                        path="/detalle-receta"
+                        path="/detalle-receta/:id"
                         element={<PaginaReceta></PaginaReceta>}
                     ></Route>
                     <Route

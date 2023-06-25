@@ -29,7 +29,6 @@ const EditarReceta = () => {
     }, []);
 
     const onSubmit = (receta) => {
-        console.log(receta.id);
         // agregar la consulta de la api que pide editar es similar a crear producto
         editarReceta(receta, id).then((respuesta)=>{
             if(respuesta.status === 200){
