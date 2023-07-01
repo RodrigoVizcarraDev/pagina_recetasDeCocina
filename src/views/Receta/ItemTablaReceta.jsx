@@ -1,6 +1,6 @@
 import { Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import { borrarReceta } from "../../helpers/queries";
+import {borrarReceta} from "../../helpers/queries";
 import Swal from "sweetalert2";
 //nombreReceta, imagen, descripcion, id
 const ItemTablaReceta = ({receta, recetas, setListaRecetas}) => {
@@ -21,12 +21,10 @@ const ItemTablaReceta = ({receta, recetas, setListaRecetas}) => {
                 )
             }
         })
-
+    }
     const eliminarRecetaSeleccionada = () =>{
         const nuevaListaRecetas = recetas.filter((recetaFiltrada) => recetaFiltrada !== receta);
         setListaRecetas(nuevaListaRecetas);
-    }
-        
     }
     return (
         <tr>

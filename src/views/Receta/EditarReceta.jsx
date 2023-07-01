@@ -113,7 +113,6 @@ const EditarReceta = () => {
                         </Form.Text>
                     </FloatingLabel>
                     <Button
-                        onSubmit={handleSubmit(onSubmit)}
                         variant="primary"
                         type="submit"
                         className="mt-3"
