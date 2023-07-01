@@ -14,7 +14,6 @@ const PaginaReceta = () => {
     useEffect(()=>{
         obtenerReceta(id).then((respuesta)=>{
             if(respuesta){
-                console.log(respuesta);
                 setRecetaObtenida(respuesta);
             }
         });
