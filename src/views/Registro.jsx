@@ -14,20 +14,12 @@ const Registro = () => {
     } = useForm();
 
     const onSubmit = (usuario) => {
-        crearUsuario(usuario).then((respuesta)=>{
-            if(respuesta.status === 201){
-                Swal.fire(
-                    `Usuario creado con exito`,
-                    "Exito",
-                    "success"
-                );
+        crearUsuario(usuario).then((respuesta) => {
+            if (respuesta.status === 201) {
+                Swal.fire(`Usuario creado con exito`, "Exito", "success");
                 reset();
-            }else{
-                Swal.fire(
-                    "Usuario no pudo ser creado",
-                    "Error",
-                    "error"
-                );
+            } else {
+                Swal.fire("Usuario no pudo ser creado", "Error", "error");
             }
         });
     };
@@ -49,12 +41,14 @@ const Registro = () => {
                                 required: "El nombre de usuario es obligatorio",
                                 minLength: {
                                     value: 2,
-                                    message: "El nombre de usuario debe tener mas de dos caracteres"
+                                    message:
+                                        "El nombre de usuario debe tener mas de dos caracteres",
                                 },
-                                maxLength:{
+                                maxLength: {
                                     value: 20,
-                                    message: "El nombre de usuario es hasta 20 caracteres"
-                                }
+                                    message:
+                                        "El nombre de usuario es hasta 20 caracteres",
+                                },
                             })}
                         />
                         <Form.Text className="text-danger">
@@ -66,12 +60,13 @@ const Registro = () => {
                         <Form.Control
                             type="email"
                             placeholder="Ingrese un email"
-                            {...register("email",{
+                            {...register("email", {
                                 required: "El email es obligatorio",
-                                pattern:{
+                                pattern: {
                                     value: /^(?!\.)(([^<>()\[\]\\.,;:\s@\"]+(\.[^<>()\[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
-                                    message: "El email debe tener el siguiente formato mail@dominio.com"
-                                }
+                                    message:
+                                        "El email debe tener el siguiente formato mail@dominio.com",
+                                },
                             })}
                         />
                         <Form.Text className="text-danger">
@@ -83,12 +78,13 @@ const Registro = () => {
                         <Form.Control
                             type="password"
                             placeholder="Ingrese un password"
-                            {...register("password",{
+                            {...register("password", {
                                 required: "El password es requerido",
-                                pattern:{
+                                pattern: {
                                     value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,16}$/,
-                                    message: "El password debe tener entre 8 y 16 caracteres, al menos un digito, almenos una minuscula y al menos una mayuscula"
-                                }
+                                    message:
+                                        "El password debe tener entre 8 y 16 caracteres, al menos un digito, almenos una minuscula y al menos una mayuscula",
+                                },
                             })}
                         />
                         <Form.Text className="text-danger">
