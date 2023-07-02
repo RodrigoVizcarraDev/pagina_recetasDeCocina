@@ -45,7 +45,6 @@ export const consultarListaRecetas = async () => {
 
         return listaRecetas;
     } catch (error) {
-        console.log("error en el admin");
         console.log(error);
     }
 };
