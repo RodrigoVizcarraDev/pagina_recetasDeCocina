@@ -45,6 +45,7 @@ export const consultarListaRecetas = async () => {
 
         return listaRecetas;
     } catch (error) {
+        console.log("error en el admin");
         console.log(error);
     }
 };
@@ -87,12 +88,12 @@ export const obtenerReceta = async (id) => {
     }
 };
 
-export const crearReceta = async(receta) => {
+export const crearReceta = async (receta) => {
     try {
         const respuesta = await fetch(URL_receta, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(receta)
+            body: JSON.stringify(receta),
         });
         return respuesta; // retorna una receta creada
     } catch (error) {
@@ -100,12 +101,12 @@ export const crearReceta = async(receta) => {
     }
 };
 
-export const crearUsuario = async(usuario) => {
+export const crearUsuario = async (usuario) => {
     try {
         const respuesta = await fetch(URL_usuario, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(usuario)
+            body: JSON.stringify(usuario),
         });
         return respuesta; // retorna una receta creada
     } catch (error) {

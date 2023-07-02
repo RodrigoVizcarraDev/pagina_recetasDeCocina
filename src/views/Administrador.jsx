@@ -5,7 +5,7 @@ import { consultarListaRecetas } from "../helpers/queries";
 import Swal from "sweetalert2";
 import { Link } from "react-router-dom";
 
-const Administrador = ({}) => {
+const Administrador = () => {
     const [recetas, setListaRecetas] = useState([]);
     
     useEffect(() => {
